@@ -1,18 +1,13 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import com.stevedunstan.jokes.JokeActivity;
-import com.stevedunstan.jokes.JokeRepository;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements JokeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +39,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void tellJoke(View view){
-        Intent jokeIntent = new Intent(this, JokeActivity.class);
-        JokeRepository jokeRepository = new JokeRepository();
-        jokeIntent.putExtra("com.stevedunstan.jokes.JOKE", jokeRepository.findJoke());
-        startActivity(jokeIntent);
+        // TODO: start spinner
+        JokeFactory jokeFactory = new JokeFactory(this);
+        jokeFactory.getJoke(this);
     }
 
 
+    @Override
+    public void jokeDelivered() {
+        // TODO: stop spinner
+    }
 }
