@@ -5,7 +5,6 @@ targetCompatibility = 1.7
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 10
@@ -20,11 +19,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        freeConfig {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+        }
+        paidConfig {
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':jokerepository')
     compile project(':jokecomponents')
     compile project(path: ':JokeService', configuration: 'android-endpoints')
